@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>CanJS Tutorial</title>
+<link href="stype.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>CanJS Tutorial</h1>
+	<table id="todos"></table>
+	<input id="editor"/>
+	
+	<span id="addtitle">
+		<input type="button" class="buttonAdd" value="AddElement"/>
+	</span>
+	
+	<script type="text/ejs" id="todosEjs">
+		<% can.each(this, function(val, key) { %>
+			<tr <%= (el) -> el.data("todo", val) %>>
+				<td class="center">
+					<input class="item" type="checkbox"
+						<%= val.attr("completed") ? "checked" : "" %>
+					/>
+				</td>
+
+				<td class="content"> 
+					<%= val.attr("title") %>
+				</td>
+
+				<td class="destroy">
+					<a href="#">X</a>
+				</td>
+			</tr>
+		<% }) %>
+	</script>
+	
+	<script type="text/ejs" id="addEjs">
+		
+	</script>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/canjs/can.jquery.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+
+</body>
+</html>
