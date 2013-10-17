@@ -14,7 +14,7 @@ var Todo = can.Model({
     destroy: 'DELETE /todos/{id}'
 }, {});
 
-var _addtodo = new Todo({title: "Finish canjs"});
+var _addtodo = new Todo({title: "Finishcanjs"});
 	_addtodo.bind("created", function(ev, created) {
 	console.log("Event: ");
 	console.log(ev);
