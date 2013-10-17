@@ -56,20 +56,23 @@ public class TodoController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public @ResponseBody String create(@RequestBody String name, BindingResult result) {
+		System.err.print("----------POST-------------" +name);
 		todoRepository.save(new Todo(name, true));
 		return "OK";
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public @ResponseBody String update(@PathVariable Long id, @RequestBody Todo todo, BindingResult result) {
-		todo.setId(id);
+	public @ResponseBody String update(@PathVariable Long id, @RequestBody String name, BindingResult result) {
+		System.err.print("------------------PUT-----------------" +name);
+		Todo todo = todoRepository.findOne(id);
+		todo.setTitle(name);
 		todoRepository.save(todo);
 		return "OK";
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody String delete(@PathVariable Long id, BindingResult result) {
-		System.err.print("-----------------------" +id);
+	public @ResponseBody String delete(@PathVariable Long id) {
+		System.err.print("-----------------========DELETE===================------" +id);
 		todoRepository.delete(id);
 		return "OK";
 	}
