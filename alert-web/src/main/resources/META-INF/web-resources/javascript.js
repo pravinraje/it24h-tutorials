@@ -14,15 +14,15 @@ var Todo = can.Model({
     destroy: 'DELETE /todos/{id}'
 }, {});
 
-var _addtodo = new Todo({title: "Finishcanjs"});
-	_addtodo.bind("created", function(ev, created) {
-	console.log("Event: ");
-	console.log(ev);
-	console.log("Created: ");
-	console.log(created);
-	console.log(this);
-});
-_addtodo.save();
+//var _addtodo = new Todo({title: "Finishcanjs"});
+//	_addtodo.bind("created", function(ev, created) {
+//	console.log("Event: ");
+//	console.log(ev);
+//	console.log("Created: ");
+//	console.log(created);
+//	console.log(this);
+//});
+//_addtodo.save();
 
 var Todos = can.Control.extend({
 	"init" : function(element, options) {
