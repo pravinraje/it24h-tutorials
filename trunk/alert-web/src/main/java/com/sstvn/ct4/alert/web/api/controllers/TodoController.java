@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sstvn.ct4.alert.core.models.Book;
 import com.sstvn.ct4.alert.core.models.Student;
 import com.sstvn.ct4.alert.core.models.Todo;
 import com.sstvn.ct4.alert.core.repositories.StudentRepository;
@@ -54,11 +55,10 @@ public class TodoController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public @ResponseBody String create(@RequestBody Todo todo, BindingResult result) {
-		todoRepository.save(todo);
+	public @ResponseBody String create(@RequestBody String name, BindingResult result) {
+		todoRepository.save(new Todo(name, true));
 		return "OK";
 	}
-	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public @ResponseBody String update(@PathVariable Long id, @RequestBody Todo todo, BindingResult result) {
@@ -69,6 +69,7 @@ public class TodoController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public @ResponseBody String delete(@PathVariable Long id, BindingResult result) {
+		System.err.print("-----------------------" +id);
 		todoRepository.delete(id);
 		return "OK";
 	}
