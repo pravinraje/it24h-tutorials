@@ -33,10 +33,11 @@ public class Todo {
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
+	
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", title=" + title + ", completed="
-				+ completed + "]";
+		return String.format("Todo [id=%s, title=%s, completed=%s]", id, title,
+				completed);
 	}
 	public Todo(String title, Boolean completed) {
 		super();
