@@ -8,4 +8,6 @@ import com.sstvn.ct4.alert.core.models.Todo;
 
 public interface TodoRepository extends JpaRepository<Todo, Long>{
 	public List<Todo> findAllByCompleted(boolean completed);
+	public Todo findOneByTitle(String title);
+	public List<Todo> findAllByTitleAndCompleted(String title, boolean completed);
 }
