@@ -6,14 +6,42 @@ var TODOS = [
     {id: 3, title: "do dishes", completed: false}
 ];
 
-var Todo = can.Model({
+var Todo = can.Model.extend({
     findAll: 'GET /todos',
     findOne: 'GET /todos/{id}',
-    create:  'POST /todos',
-    update:  'PUT /todos/{id}',
-    destroy: 'DELETE /todos/{id}'
+    create:  function( attrs ){
+        return $.post("/todos",attrs, undefined ,"json");
+    },
+//    update: "/todos/{id}",
+    update:  function(id, attrs ){
+        return $.ajax("/todos/" + id,{
+        	type: "PUT",
+        	processData: false,
+        	data: JSON.stringify(attrs),
+        	dataType: 'json',
+        	contentType: "application/json; charset=utf-8"
+        });
+    },
+    destroy:"/todos/{id}" 
+    
 }, {});
-
+//var Todo = can.Model.extend({
+//    findAll : function(){
+//      return $.Deferred().resolve(TODOS);
+//    },
+//    findOne : function(params){
+//      return $.Deferred().resolve(TODOS[(+params.id)-1]);
+//    },
+//    update  : function(id, attrs){
+//        // update TODOS with the new attrs
+//        $.extend(TODOS[id -1], attrs);
+//        return $.Deferred().resolve()
+//    },
+//    destroy : function(){
+//        return $.Deferred().resolve()
+//    }
+//},
+//{});
 //var _addtodo = new Todo({title: "Finishcanjs"});
 //	_addtodo.bind("created", function(ev, created) {
 //	console.log("Event: ");
@@ -28,18 +56,34 @@ var Todos = can.Control.extend({
 	"init" : function(element, options) {
 		var el = this.element; // = $("#todos")
 		Todo.findAll({}, function(todos) {
-			el.html(can.view("todosEjs", todos));
+			console.log("findAll");
+			TODOS = todos;
+			todos.bind("remove", function( ev, oldVals, indx ) {
+				
+			    console.log(oldVals)
+			})
+			el.html(can.view("todosEjs", {todos: todos}));
 		});
 	},
 	
 	"tr click" : function(tr) {
 		tr.trigger("selected", tr.data("todo"));
-		console.log("hello the <tr>");
+//		console.log("hello the <tr>");
 	},
 	
 	"tr .destroy click" : function(el, ev) {
-		alert("Ban da delete: "+el.closest('tr').data('todo').title);
-		el.closest('tr').data('todo').destroy();
+//		alert("Ban da delete: "+el.closest('tr').data('todo').title);
+		var todo = el.closest('tr').data('todo');
+		console.log(TODOS);
+		console.log(todo);
+		todo.destroy(function(destroyed) {
+			console.log(destroyed);
+		}, function(xhr) {
+			console.log(xhr);
+			console.log("failed to destroyed");
+		});
+		
+		
 		ev.stopPropagation();
 	},
 });
@@ -92,3 +136,5 @@ var Routing = can.Control.extend({
 }) ;
 
 new Routing(document.body);
+
+can.route.ready()

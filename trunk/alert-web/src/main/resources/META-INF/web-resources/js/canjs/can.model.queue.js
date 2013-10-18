@@ -1,8 +1,8 @@
 /*!
- * CanJS - 1.1.7
+ * CanJS - 2.0.0
  * http://canjs.us/
  * Copyright (c) 2013 Bitovi
- * Wed, 24 Jul 2013 00:23:53 GMT
+ * Wed, 16 Oct 2013 20:41:07 GMT
  * Licensed MIT
  * Includes: can/model/queue
  * Download from: http://canjs.com
@@ -126,7 +126,7 @@
     can.extend(can.Model.prototype, {
             setup: function() {
                 setupFn.apply(this, arguments);
-                this._requestQueue = new can.Observe.List;
+                this._requestQueue = new can.List;
             },
             _changes: function(ev, attr, how, newVal, oldVal) {
                 // record changes if there is a request running
