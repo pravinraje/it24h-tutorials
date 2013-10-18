@@ -63,26 +63,24 @@ public class TodoController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public @ResponseBody String create(@RequestBody String name, BindingResult result) {
-		System.err.print("----------POST-------------" +name);
-		todoRepository.save(new Todo(name, true));
+	public @ResponseBody String create(@RequestBody Todo todo, BindingResult result) {
+		System.err.print("----------POST-------------" +todo);
+		todoRepository.save(todo);
 		return "OK";
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public @ResponseBody String update(@PathVariable Long id, @RequestBody String name, BindingResult result) {
-		System.err.print("------------------PUT-----------------" +name);
-		Todo todo = todoRepository.findOne(id);
-		todo.setTitle(name);
+	public @ResponseBody String update(@PathVariable Long id, @RequestBody Todo todo, BindingResult result) {
+		System.err.print("------------------PUT-----------------" +todo);
+		todo.setId(id);
 		todoRepository.save(todo);
 		return "OK";
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody String delete(@PathVariable Long id) {
+	public @ResponseBody void delete(@PathVariable Long id) {
 		System.err.print("-----------------=======DELETE=======------" +id);
 		todoRepository.delete(id);
-		return "OK";
 	}
 	
 	@RequestMapping("/fixtures") 
