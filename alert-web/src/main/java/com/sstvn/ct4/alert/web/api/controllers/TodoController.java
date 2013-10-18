@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sstvn.ct4.alert.core.models.Book;
 import com.sstvn.ct4.alert.core.models.Student;
 import com.sstvn.ct4.alert.core.models.Todo;
 import com.sstvn.ct4.alert.core.repositories.StudentRepository;
@@ -45,8 +44,17 @@ public class TodoController {
 	@RequestMapping("/status/{status}")
 	public @ResponseBody List<Todo> listByStatus(@PathVariable("status") String status) {
 		Boolean isCompleted = status.equals("completed") ? true : false;
-		
 		return todoRepository.findAllByCompleted(isCompleted);
+	}
+	
+	@RequestMapping("/title/{title}")
+	public @ResponseBody Todo titleByTitle(@PathVariable("title") String title) {
+		return todoRepository.findOneByTitle(title);
+	}
+	
+	@RequestMapping("title_true/{title}")
+	public @ResponseBody List<Todo> listTitleTrue(@PathVariable("title") String title) {
+		return todoRepository.findAllByTitleAndCompleted(title, true);
 	}
 	
 	@RequestMapping("/{id}")
@@ -72,7 +80,7 @@ public class TodoController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public @ResponseBody String delete(@PathVariable Long id) {
-		System.err.print("-----------------========DELETE===================------" +id);
+		System.err.print("-----------------=======DELETE=======------" +id);
 		todoRepository.delete(id);
 		return "OK";
 	}
@@ -80,6 +88,8 @@ public class TodoController {
 	@RequestMapping("/fixtures") 
 	public @ResponseBody String fixtures() {
 		todoRepository.save(new Todo("Hello", true));
+		todoRepository.save(new Todo("World", true));
+		todoRepository.save(new Todo("Hello", false));
 		todoRepository.save(new Todo("World", true));
 		return "OK";
 	}
