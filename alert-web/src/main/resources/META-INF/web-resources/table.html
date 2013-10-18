@@ -12,31 +12,27 @@
 		<input type="button" class="buttonAdd" value="AddElement"/>
 	</span>
 	
-	<script type="text/ejs" id="todosEjs">
-		<% can.each(this, function(val, key) { %>
-			<tr <%= (el) -> el.data("todo", val) %>>
+	<script type="text/mustache" id="todosEjs">
+		{{#todos}}
+			<tr {{data 'todo'}}>
 				<td class="center">
-					<input class="item" type="checkbox"
-						<%= val.attr("completed") ? "checked" : "" %>
-					/>
+					<input class="item" type="checkbox" {{#if completed}}checked{{/if}} />
 				</td>
 
-				<td class="content"> 
-					<%= val.attr("title") %>
-				</td>
+				<td class="content">{{title}}</td>
 
 				<td class="destroy">
 					<a href="#">X</a>
 				</td>
 			</tr>
-		<% }) %>
+		{{/todos}}
 	</script>
 	
 	<script type="text/ejs" id="addEjs">
 		
 	</script>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/canjs/can.jquery.js"></script>
 	<script type="text/javascript" src="javascript.js"></script>
 
