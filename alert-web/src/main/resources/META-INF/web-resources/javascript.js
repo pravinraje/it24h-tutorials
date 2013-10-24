@@ -10,7 +10,13 @@ var Todo = can.Model.extend({
     findAll: 'GET /todos',
     findOne: 'GET /todos/{id}',
     create:  function( attrs ){
-        return $.post("/todos",attrs, undefined ,"json");
+        return $.ajax("/todos/",{
+        	type: "POST",
+        	processData: false,
+        	data: JSON.stringify(attrs),
+        	dataType: 'json',
+        	contentType: "application/json; charset=utf-8"
+        });
     },
 //    update: "/todos/{id}",
     update:  function(id, attrs ){
@@ -42,15 +48,15 @@ var Todo = can.Model.extend({
 //    }
 //},
 //{});
-//var _addtodo = new Todo({title: "Finishcanjs"});
-//	_addtodo.bind("created", function(ev, created) {
-//	console.log("Event: ");
-//	console.log(ev);
-//	console.log("Created: ");
-//	console.log(created);
-//	console.log(this);
-//});
-//_addtodo.save();
+var _addtodo = new Todo({title: "this is new"});
+	_addtodo.bind("created", function(ev, created) {
+	console.log("Event: ");
+	console.log(ev);
+	console.log("Created: ");
+	console.log(created);
+	console.log(this);
+});
+_addtodo.save();
 
 var Todos = can.Control.extend({
 	"init" : function(element, options) {
