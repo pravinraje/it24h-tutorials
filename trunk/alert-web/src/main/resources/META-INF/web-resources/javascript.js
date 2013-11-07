@@ -60,7 +60,7 @@ _addtodo.save();
 
 var Todos = can.Control.extend({
 	"init" : function(element, options) {
-		var el = this.element; // = $("#todos")
+		var el = $("#todos"); //= this.element; 
 		Todo.findAll({}, function(todos) {
 			console.log("findAll");
 			TODOS = todos;
