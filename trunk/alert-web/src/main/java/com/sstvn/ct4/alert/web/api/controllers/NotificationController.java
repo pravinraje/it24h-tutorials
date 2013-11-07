@@ -51,5 +51,10 @@ public class NotificationController {
 	}
 	
 	//----------------------------------------------------------------
+	@RequestMapping("/length")
+	public @ResponseBody int notificationLength() {
+		List<Notification> list = notificationRepository.findAll();
+		return list.size();
+	}
 	
 }
