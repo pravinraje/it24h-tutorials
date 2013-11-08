@@ -1,0 +1,19 @@
+.subnav {background:#5EB7CB!important; border:1px solid #72D4EA;}
+.subnav .share{ float:right;}
+.subnav .share ul{list-style: none;margin: 0;padding: 0;}
+.subnav .share ul li{position:relative; float:left; padding-right:5px;}
+
+.dropdown {
+	background-color: silver;
+	width: 300px;
+	margin-left: 900px;
+}
+
+.dropdown .dropdown-menu-extended-notification li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	color: blue;
+	text-shadow: none;
+	width: 300px;
+}

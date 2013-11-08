@@ -1,1 +1,15 @@
-@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Lato:100,400,700);
+
+* {
+	font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+li { padding: 5px; font-size: 18px; cursor: pointer;}
+li:hover {
+    background-color: #fff;
+}
+
+.dropdown-menu-extended-notification {
+}
