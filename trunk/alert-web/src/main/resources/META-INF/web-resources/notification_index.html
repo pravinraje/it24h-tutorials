@@ -2,13 +2,37 @@
 <head>
 <title>CanJS Tutorial</title>
 <link href="stype_notification.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/zerogrid.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<script id="template" type="text/mustache">
-    <h1>Welcome {{user}}!</h1>
-    <p>You have {{messages}} messages.</p>
-	</script>
+	<div class="subnav">
+		<div class="wrap-subnav zerogrid">
+			<div class="share" 
+							onmouseover="show_visibility('header_notification_bar');"
+							onmouseout="hide_visibility('header_notification_bar');">
+				<ul>
+					<li><span class="badge" id="id_badge"></span>
+					<a href="#"><img src="images/google-plus-icon.png" title="Google Plus"/></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
+	<div class="dropdown" id="id_dropdown">
+		<ul class="dropdown-menu-extended-notification" id="header_notification_bar"></ul>
+	</div>
+	<script id="template" type="text/mustache">
+		{{#id_badge}}
+			{{number_notification}}
+		{{/id_badge}}
+
+		{{#header_notification_bar}}
+			<li>
+				{{notification}}
+			</li>
+		{{/header_notification_bar}}
+	</script>
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/canjs/can.jquery.js"></script>
